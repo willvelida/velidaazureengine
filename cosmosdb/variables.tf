@@ -21,9 +21,3 @@ variable "cosmos_account_name" {
   type = string
   default = "willvelidacosmosdb"
 }
-
-variable "cosmos_database_name" {
-  description = "Name of the Database in my Cosmos DB account"
-  type = string
-  default = "TestDB"
-}
