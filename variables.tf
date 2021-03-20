@@ -51,3 +51,21 @@ variable "api_management_name" {
   default = "velidaapimanagement"
   type = string
 }
+
+variable "cosmos_db_connection_string_secret" {
+  default = "cosmosdbconnectionstring"
+  description = "Name of the secret for the Cosmos DB Connection String"
+  type = string
+}
+
+variable "azure_storage_connection_string_secret" {
+  default = "azurestorageconnectionstring"
+  description = "Name of the secret for the connection string to Azure Blob Storage"
+  type = string
+}
+
+variable "azure_storage_primary_access_key_secret" {
+  default = "azurestorageprimaryaccesskey"
+  description = "Name of the secret for the primary access key to Azure Blob Storage"
+  type = string
+}

@@ -87,9 +87,24 @@ resource "azurerm_key_vault" "keyvault" {
   }
 }
 
+# Cosmos DB Connection String Secret
 resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
-  name = "cosmosdbconnectionstring"
+  name = var.cosmos_db_connection_string_secret
   value = azurerm_cosmosdb_account.db.connection_strings[0]
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+# Azure Storage Connection String
+resource "azurerm_key_vault_secret" "azure_storage_connection_string" {
+  name = var.azure_storage_connection_string_secret
+  value = azurerm_storage_account.storage.primary_connection_string
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+# Azure Storage Primary Access Key
+resource "azurerm_key_vault_secret" "azure_storage_primary_access" {
+  name = var.azure_storage_primary_access_key_secret
+  value = azurerm_storage_account.storage.primary_access_key
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
