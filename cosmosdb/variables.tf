@@ -9,3 +9,9 @@ variable "resource_group_location" {
   type = string
   default = "australiaeast"
 }
+
+variable "cosmos_failover_location" {
+  description = "Cosmos DB Failover location"
+  type = string
+  default = "australiasoutheast"
+}

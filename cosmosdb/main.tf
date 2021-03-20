@@ -30,6 +30,11 @@ resource "azurerm_cosmosdb_account" "db" {
     failover_priority = 0
   }
 
+  geo_location {
+    location = var.cosmos_failover_location
+    failover_priority = 1
+  }
+
   analytical_storage_enabled = true
 
   consistency_policy {
