@@ -12,11 +12,13 @@ provider "azurerm" {
   features {}
 }
 
+## Velida Azure Engine Resource Group
 resource "azurerm_resource_group" "rg" {
   name = var.resource_group_name
   location = var.resource_group_location
 }
 
+## Azure Cosmos DB Account
 resource "azurerm_cosmosdb_account" "db" {
   name = var.cosmos_account_name
   location = var.resource_group_location
@@ -41,3 +43,4 @@ resource "azurerm_cosmosdb_account" "db" {
     consistency_level = "Session"
   }
 }
+
