@@ -13,7 +13,7 @@ stages:
   - stage: TerraformContinuousIntegration
     displayName: Terraform Module CI
     jobs:
-    - job: TerraformContinuousIntegration CI Job
+    - job: TerraformContinuousIntegration_CI_Job
       pool:
         vmImage: ubuntu-20.04
       steps:
