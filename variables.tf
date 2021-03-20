@@ -33,3 +33,15 @@ variable "key_vault_name" {
   default = "willvelidakeyvault"
   type = string
 }
+
+variable "log_analytics_name" {
+  description = "Name of the Log Analytics"
+  default = "velidaloganalytics"
+  type = string
+}
+
+variable "cosmos_log_analytic_setting" {
+  description = "Name of the diagnostic log settings for Cosmos DB"
+  default = "cosmosdb_loganalytics_diagnostic_settings"
+  type = string
+}

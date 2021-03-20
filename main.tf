@@ -69,3 +69,43 @@ resource "azurerm_key_vault" "keyvault" {
   tenant_id = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days = 7
 }
+
+# Azure Log Analytics
+resource "azurerm_log_analytics_workspace" "logs" {
+  name = var.log_analytics_name
+  location = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  sku = "PerGB2018"
+  retention_in_days = 30
+}
+
+# Adding Cosmos DB Metrics to Log Analytics
+resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
+  name = var.cosmos_log_analytic_setting
+  target_resource_id = azurerm_cosmosdb_account.db.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.logs.id
+
+  log {
+    category = "DataPlaneRequests"
+  }
+
+  log {
+    category = "QueryRuntimeStatistics"
+  }
+
+  log {
+    category = "PartitionKeyStatistics"
+  }
+
+  log {
+    category = "PartitionKeyRUConsumption"
+  }
+
+  log {
+    category = "ControlPlaneRequests"
+  }
+
+  metric {
+    category = "Requests"
+  }
+}
