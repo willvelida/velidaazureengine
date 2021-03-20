@@ -21,12 +21,6 @@ stages:
         displayName: 'Install Terraform'
         inputs:
           terraformVersion: $(terraformVersion)
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'azureConnectionName'
-          scriptType: 'ps'
-          scriptLocation: 'inlineScript'
-          inlineScript: 'az login'
       - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
         displayName: 'Run Terraform Init'
         inputs:
