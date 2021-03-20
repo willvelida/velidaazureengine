@@ -15,3 +15,15 @@ variable "cosmos_failover_location" {
   type = string
   default = "australiasoutheast"
 }
+
+variable "cosmos_account_name" {
+  description = "Name of the Cosmos DB account"
+  type = string
+  default = "willvelidacosmosdb"
+}
+
+variable "cosmos_database_name" {
+  description = "Name of the Database in my Cosmos DB account"
+  type = string
+  default = "TestDB"
+}
