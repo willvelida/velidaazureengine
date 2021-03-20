@@ -21,3 +21,9 @@ variable "cosmos_account_name" {
   type = string
   default = "willvelidacosmosdb"
 }
+
+variable "storage_account_name" {
+  default = "velidastorage"
+  description = "Name of the Storage account"
+  type = string
+}
