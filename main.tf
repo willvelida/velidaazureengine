@@ -68,6 +68,29 @@ resource "azurerm_key_vault" "keyvault" {
   sku_name = "standard"
   tenant_id = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days = 7
+
+  access_policy  {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    secret_permissions = [
+      "Get",
+      "Set",
+      "List"
+    ]
+
+    key_permissions = [
+      "List",
+      "Get",
+      "Create"
+    ]
+  }
+}
+
+resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
+  name = "cosmosdbconnectionstring"
+  value = azurerm_cosmosdb_account.db.connection_strings[0]
+  key_vault_id = azurerm_key_vault.keyvault.id
 }
 
 # Azure Log Analytics
