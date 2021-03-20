@@ -109,3 +109,14 @@ resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
     category = "Requests"
   }
 }
+
+## Add API Management
+resource "azurerm_api_management" "apiportal" {
+  name = var.api_management_name
+  location = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  publisher_name = "Will Velida"
+  publisher_email = "willvelida@hotmail.co.uk"
+
+  sku_name = "Developer_1"
+}

@@ -45,3 +45,9 @@ variable "cosmos_log_analytic_setting" {
   default = "cosmosdb_loganalytics_diagnostic_settings"
   type = string
 }
+
+variable "api_management_name" {
+  description = "Name of the API Management Instance"
+  default = "velidaapimanagement"
+  type = string
+}
