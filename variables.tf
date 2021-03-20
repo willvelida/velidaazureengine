@@ -27,3 +27,9 @@ variable "storage_account_name" {
   description = "Name of the Storage account"
   type = string
 }
+
+variable "key_vault_name" {
+  description = "Name of the Key Vault"
+  default = "willvelidakeyvault"
+  type = string
+}
