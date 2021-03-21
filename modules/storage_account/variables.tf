@@ -27,3 +27,9 @@ variable "account_kind" {
   description = "The kind of Storage Account to provision"
   type = string
 }
+
+variable "storage_account_tags" {
+  description = "Tags to set on the storage account. (Optional)"
+  type = map(string)
+  default = {}
+}

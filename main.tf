@@ -30,6 +30,22 @@ module "resource_group" {
   }
 }
 
+## Storage Account
+module "storage_account" {
+  source = "./modules/storage_account"
+  storage_account_name = var.storage_account_name
+  resource_group_name = module.resource_group.name
+  storage_location = module.resource_group.location
+  account_tier = "Standard"
+  account_replication_type = "GRS"
+  account_kind = "StorageV2"
+
+  storage_account_tags = {
+    "Environment" = "Dev"
+    "MainAzureEngineResource" = "True"
+  }
+}
+
 ## Azure Cosmos DB Account
 resource "azurerm_cosmosdb_account" "db" {
   name = var.cosmos_account_name
@@ -54,17 +70,6 @@ resource "azurerm_cosmosdb_account" "db" {
   consistency_policy {
     consistency_level = "Session"
   }
-}
-
-## Storage Account
-module "storage_account" {
-  source = "./modules/storage_account"
-  storage_account_name = var.storage_account_name
-  resource_group_name = module.resource_group.name
-  storage_location = module.resource_group.location
-  account_tier = "Standard"
-  account_replication_type = "GRS"
-  account_kind = "StorageV2"
 }
 
 # Key Vault

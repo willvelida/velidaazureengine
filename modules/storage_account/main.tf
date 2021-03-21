@@ -5,4 +5,6 @@ resource "azurerm_storage_account" "this" {
   account_tier = var.account_tier
   account_replication_type = var.account_replication_type
   account_kind = var.account_kind
+
+  tags = var.storage_account_tags
 }
