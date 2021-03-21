@@ -57,12 +57,14 @@ resource "azurerm_cosmosdb_account" "db" {
 }
 
 ## Storage Account
-resource "azurerm_storage_account" "storage" {
-  name = var.storage_account_name
+module "storage_account" {
+  source = "./modules/storage_account"
+  storage_account_name = var.storage_account_name
   resource_group_name = module.resource_group.name
-  location = module.resource_group.location
+  storage_location = module.resource_group.location
   account_tier = "Standard"
   account_replication_type = "GRS"
+  account_kind = "StorageV2"
 }
 
 # Key Vault
@@ -116,14 +118,14 @@ resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
 # Azure Storage Connection String
 resource "azurerm_key_vault_secret" "azure_storage_connection_string" {
   name = var.azure_storage_connection_string_secret
-  value = azurerm_storage_account.storage.primary_connection_string
+  value = module.storage_account.connection_string
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
 # Azure Storage Primary Access Key
 resource "azurerm_key_vault_secret" "azure_storage_primary_access" {
   name = var.azure_storage_primary_access_key_secret
-  value = azurerm_storage_account.storage.primary_access_key
+  value = module.storage_account.primary_access_key
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
