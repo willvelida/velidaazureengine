@@ -46,13 +46,6 @@ module "storage_account" {
   }
 }
 
-module "storage_container" {
-  source = "./modules/storage_container"
-  storage_container_name = "testcontainer"
-  storage_account_name = module.storage_account.storage_account_name
-  container_access_type = "private"
-}
-
 ## Azure Cosmos DB Account
 resource "azurerm_cosmosdb_account" "db" {
   name = var.cosmos_account_name
