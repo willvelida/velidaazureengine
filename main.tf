@@ -82,13 +82,17 @@ resource "azurerm_key_vault" "keyvault" {
     secret_permissions = [
       "Get",
       "Set",
-      "List"
+      "List",
+      "Delete",
+      "Recover"
     ]
 
     key_permissions = [
       "List",
       "Get",
-      "Create"
+      "Create",
+      "Delete",
+      "Recover"
     ]
   }
 }
@@ -100,4 +104,56 @@ resource "azurerm_log_analytics_workspace" "logs" {
   resource_group_name = module.resource_group.name
   sku = "PerGB2018"
   retention_in_days = 30
+}
+
+# Cosmos DB Connection String Secret
+resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
+  name = var.cosmos_db_connection_string_secret
+  value = azurerm_cosmosdb_account.db.connection_strings[0]
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+# Azure Storage Connection String
+resource "azurerm_key_vault_secret" "azure_storage_connection_string" {
+  name = var.azure_storage_connection_string_secret
+  value = azurerm_storage_account.storage.primary_connection_string
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+# Azure Storage Primary Access Key
+resource "azurerm_key_vault_secret" "azure_storage_primary_access" {
+  name = var.azure_storage_primary_access_key_secret
+  value = azurerm_storage_account.storage.primary_access_key
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+# Adding Cosmos DB Metrics to Log Analytics
+resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
+  name = var.cosmos_log_analytic_setting
+  target_resource_id = azurerm_cosmosdb_account.db.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.logs.id
+
+  log {
+    category = "DataPlaneRequests"
+  }
+
+  log {
+    category = "QueryRuntimeStatistics"
+  }
+
+  log {
+    category = "PartitionKeyStatistics"
+  }
+
+  log {
+    category = "PartitionKeyRUConsumption"
+  }
+
+  log {
+    category = "ControlPlaneRequests"
+  }
+
+  metric {
+    category = "Requests"
+  }
 }
