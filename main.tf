@@ -58,6 +58,13 @@ module "service_bus_namespace" {
   }
 }
 
+module "service_bus_topic" {
+  source = "./modules/service_bus_topic"
+  topic_name = var.topic_name
+  topic_resource_group = module.resource_group.name
+  topic_namespace = module.service_bus_namespace.service_bus_namespace_name
+}
+
 # Key Vault
 resource "azurerm_key_vault" "keyvault" {
   name = var.key_vault_name

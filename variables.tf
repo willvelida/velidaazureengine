@@ -75,3 +75,9 @@ variable "service_bus_namespace_name" {
   description = "Name of the Service Bus Namespace"
   type = string
 }
+
+variable "topic_name" {
+  default = "velidatopic"
+  description = "Name of the topic to provision in Service Bus"
+  type = string
+}
