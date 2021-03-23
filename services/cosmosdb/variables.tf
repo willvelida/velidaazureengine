@@ -11,7 +11,7 @@ variable "resource_group_location" {
 }
 
 variable "cosmos_account_name" {
-  default = "willvelidacosmosdbv2"
+  default = "willvelidacosmosdb"
   description = "Name given to the Cosmos DB account"
   type = string
 }
