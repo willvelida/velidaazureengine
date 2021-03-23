@@ -12,11 +12,19 @@ provider "azurerm" {
   features {}
 }
 
+# Referencing key vault into terraform file
 data "azurerm_key_vault" "keyvault" {
   name = "willvelidakeyvault"
-  resource_group_name = "velidaazureengine-rg"
+  resource_group_name = var.external_resource_group_name
 }
 
+# Referencing Log Analytics into terraform file
+data "azurerm_log_analytics_workspace" "loganalytics" {
+  name = "velidaloganalytics"
+  resource_group_name = var.external_resource_group_name
+}
+
+# Reusing the resource_group module
 module "resource_group" {
     source = "../../modules/resource_group"
     resource_group_name = var.resource_group_name
@@ -28,6 +36,7 @@ module "resource_group" {
     }
 }
 
+# Creating our Cosmos DB account
 resource "azurerm_cosmosdb_account" "db" {
   name = var.cosmos_account_name
   location = module.resource_group.location
@@ -53,8 +62,46 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 }
 
+# Adding Cosmos DB Secrets to Key Vault
 resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
   name = var.cosmos_db_connection_string_secret
   value = azurerm_cosmosdb_account.db.connection_strings[0]
   key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# Adding metrics to Log Analytics
+resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
+  name = var.cosmos_log_analytics_settings
+  target_resource_id = azurerm_cosmosdb_account.db.id
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.loganalytics.id
+
+  log {
+    category = "DataPlaneRequests"
+    enabled = true
+  }
+
+  log {
+    category = "QueryRuntimeStatistics"
+    enabled = true
+  }
+
+  log {
+    category = "PartitionKeyStatistics"
+    enabled = true
+  }
+
+  log {
+    category = "PartitionKeyRUConsumption"
+    enabled = true
+  }
+
+  log {
+    category = "ControlPlaneRequests"
+    enabled = true
+  }
+
+  metric {
+    category = "Requests"
+    enabled = true
+  }
 }
