@@ -59,3 +59,59 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 }
 
+# Adding Cosmos DB Secrets to Key Vault
+resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
+  name = var.cosmos_db_connection_string_secret
+  value = azurerm_cosmosdb_account.db.connection_strings[0]
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmosdbendpoint" {
+  name = var.cosmos_db_endpoint
+  value = azurerm_cosmosdb_account.db.endpoint
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmosdbprimarykey" {
+  name = var.cosmos_db_primary_key
+  value = azurerm_cosmosdb_account.db.primary_key
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# Adding metrics to Log Analytics
+resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
+  name = var.cosmos_log_analytics_settings
+  target_resource_id = azurerm_cosmosdb_account.db.id
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.loganalytics.id
+
+  log {
+    category = "DataPlaneRequests"
+    enabled = true
+  }
+
+  log {
+    category = "QueryRuntimeStatistics"
+    enabled = true
+  }
+
+  log {
+    category = "PartitionKeyStatistics"
+    enabled = true
+  }
+
+  log {
+    category = "PartitionKeyRUConsumption"
+    enabled = true
+  }
+
+  log {
+    category = "ControlPlaneRequests"
+    enabled = true
+  }
+
+  metric {
+    category = "Requests"
+    enabled = true
+  }
+}
+

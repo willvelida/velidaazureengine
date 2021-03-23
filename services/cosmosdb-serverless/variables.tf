@@ -21,3 +21,27 @@ variable "external_resource_group_name" {
   description = "Name of the external resource group"
   type = string
 }
+
+variable "cosmos_db_connection_string_secret" {
+  default = "serverlesscosmosdbconnectionstring"
+  description = "Name of the secret for the Cosmos DB Serverless Connection String"
+  type = string
+}
+
+variable "cosmos_db_endpoint" {
+  default = "serverlesscosmosdbendpoint"
+  description = "Name of the secret for the Cosmos DB Serverless Endpoint"
+  type = string
+}
+
+variable "cosmos_db_primary_key" {
+  default = "serverlesscosmosprimarykey"
+  description = "Name of the secret for the Cosmos DB Serverless Primary Key"
+  type = string
+}
+
+variable "cosmos_log_analytics_settings" {
+  description = "Name of the diagnostic log settings for Cosmos DB"
+  default = "serverless_cosmosdb_loganalytics_diagnostic_settings"
+  type = string
+}
