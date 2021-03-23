@@ -69,3 +69,9 @@ variable "azure_storage_primary_access_key_secret" {
   description = "Name of the secret for the primary access key to Azure Blob Storage"
   type = string
 }
+
+variable "service_bus_namespace_name" {
+  default = "velidaservicebus"
+  description = "Name of the Service Bus Namespace"
+  type = string
+}

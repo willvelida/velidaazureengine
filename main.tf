@@ -39,8 +39,20 @@ module "storage_account" {
   account_tier = "Standard"
   account_replication_type = "GRS"
   account_kind = "StorageV2"
-
+  is_hns_enabled = "false"
   storage_account_tags = {
+    "Environment" = "Dev"
+    "MainAzureEngineResource" = "True"
+  }
+}
+
+## Service Bus
+module "service_bus_namespace" {
+  source = "./modules/service_bus_namespace"
+  service_bus_namespace_name = var.service_bus_namespace_name
+  service_bus_namespace_location = module.resource_group.location
+  service_bus_resource_group = module.resource_group.name
+  service_bus_tags = {
     "Environment" = "Dev"
     "MainAzureEngineResource" = "True"
   }
