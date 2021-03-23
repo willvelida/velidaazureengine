@@ -33,3 +33,8 @@ variable "storage_account_tags" {
   type = map(string)
   default = {}
 }
+
+variable "is_hns_enabled" {
+  description = "Is Hierarchical Namespace Enabled"
+  type = string
+}
