@@ -69,6 +69,18 @@ resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+resource "azurerm_key_vault_secret" "cosmosdbendpoint" {
+  name = var.cosmos_db_endpoint
+  value = azurerm_cosmosdb_account.db.endpoint
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmosdbprimarykey" {
+  name = var.cosmos_db_primary_key
+  value = azurerm_cosmosdb_account.db.primary_key
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 # Adding metrics to Log Analytics
 resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
   name = var.cosmos_log_analytics_settings

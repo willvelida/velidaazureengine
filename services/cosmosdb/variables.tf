@@ -28,6 +28,18 @@ variable "cosmos_db_connection_string_secret" {
   type = string
 }
 
+variable "cosmos_db_endpoint" {
+  default = "cosmosdbendpoint"
+  description = "Name of the secret for the Cosmos DB Endpoint"
+  type = string
+}
+
+variable "cosmos_db_primary_key" {
+  default = "cosmosprimarykey"
+  description = "Name of the secret for the Cosmos DB Primary Key"
+  type = string
+}
+
 variable "external_resource_group_name" {
   default = "velidaazureengine-rg"
   description = "Name of the external resource group"
