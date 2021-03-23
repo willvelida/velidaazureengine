@@ -21,3 +21,9 @@ variable "cosmos_failover_location" {
   description = "The failover location for the Cosmos DB account"
   type = string
 }
+
+variable "cosmos_db_connection_string_secret" {
+  default = "cosmosdbconnectionstring"
+  description = "Name of the secret for the Cosmos DB Connection String"
+  type = string
+}

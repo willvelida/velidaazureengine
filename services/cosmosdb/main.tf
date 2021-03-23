@@ -12,6 +12,11 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_key_vault" "keyvault" {
+  name = "willvelidakeyvault"
+  resource_group_name = "velidaazureengine-rg"
+}
+
 module "resource_group" {
     source = "../../modules/resource_group"
     resource_group_name = var.resource_group_name
@@ -46,4 +51,10 @@ resource "azurerm_cosmosdb_account" "db" {
   consistency_policy {
     consistency_level = "Session"
   }
+}
+
+resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
+  name = var.cosmos_db_connection_string_secret
+  value = azurerm_cosmosdb_account.db.connection_strings[0]
+  key_vault_id = data.azurerm_key_vault.keyvault.id
 }
