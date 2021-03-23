@@ -46,6 +46,13 @@ module "storage_account" {
   }
 }
 
+module "storage_container" {
+  source = "./modules/storage_container"
+  storage_container_name = var.my_health_files_container_name
+  storage_account_name = module.storage_account.storage_account_name
+  container_access_type = "private"
+}
+
 ## Service Bus
 module "service_bus_namespace" {
   source = "./modules/service_bus_namespace"

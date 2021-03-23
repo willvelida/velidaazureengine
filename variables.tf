@@ -81,3 +81,9 @@ variable "topic_name" {
   description = "Name of the topic to provision in Service Bus"
   type = string
 }
+
+variable "my_health_files_container_name" {
+  default = "myhealthfiles"
+  description = "Name of the container to hold all my health files"
+  type = string
+}
