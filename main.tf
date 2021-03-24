@@ -80,6 +80,10 @@ module "event_grid_system_topic" {
   location = module.resource_group.location
   source_arm_resource_id = module.storage_account.storage_account_id
   topic_type = "Microsoft.Storage.StorageAccounts"
+  tags = {
+    "Environment" = "Dev"
+    "MainAzureEngineResource" = "True"
+  }
 }
 
 # Key Vault
