@@ -87,3 +87,9 @@ variable "my_health_files_container_name" {
   description = "Name of the container to hold all my health files"
   type = string
 }
+
+variable "system_topic_name" {
+  default = "velidaeventgrid"
+  description = "Name of the Event Grid"
+  type = string
+}
