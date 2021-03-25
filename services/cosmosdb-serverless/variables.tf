@@ -45,3 +45,15 @@ variable "cosmos_log_analytics_settings" {
   default = "serverless_cosmosdb_loganalytics_diagnostic_settings"
   type = string
 }
+
+variable "sql_database_name" {
+  description = "Name of the Bookstore Database"
+  default = "BookstoreDB"
+  type = string
+}
+
+variable "sql_container_book" {
+  description = "Name of the Book Container"
+  default = "Books"
+  type = string
+}

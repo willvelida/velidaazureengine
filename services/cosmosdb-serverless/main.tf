@@ -59,6 +59,23 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 }
 
+# Creating Database
+resource "azurerm_cosmosdb_sql_database" "sqldb" {
+  name = var.sql_database_name
+  resource_group_name = azurerm_cosmosdb_account.db.resource_group_name
+  account_name = azurerm_cosmosdb_account.db.name
+}
+
+# Create container
+resource "azurerm_cosmosdb_sql_container" "bookcontainer" {
+  name = var.sql_container_book
+  resource_group_name = azurerm_cosmosdb_account.db.resource_group_name
+  account_name = azurerm_cosmosdb_account.db.name
+  database_name = azurerm_cosmosdb_sql_database.sqldb.name
+  partition_key_path = "/Category"
+  partition_key_version = 1
+}
+
 # Adding Cosmos DB Secrets to Key Vault
 resource "azurerm_key_vault_secret" "cosmosdbconnectionstring" {
   name = var.cosmos_db_connection_string_secret
