@@ -86,6 +86,15 @@ module "event_grid_system_topic" {
   }
 }
 
+# App Insights
+module "app_insights" {
+  source = "./modules/app_insights"
+  app_insights_name = var.app_insights_name
+  app_insights_location = module.resource_group.location
+  app_insights_rg = module.resource_group.name
+  app_type = "web"
+}
+
 # Key Vault
 resource "azurerm_key_vault" "keyvault" {
   name = var.key_vault_name

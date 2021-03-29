@@ -93,3 +93,8 @@ variable "system_topic_name" {
   description = "Name of the Event Grid"
   type = string
 }
+
+variable "app_insights_name" {
+  default = "velidaapplicationinsights"
+  type = string
+}
