@@ -21,3 +21,7 @@ variable "velida_engine_resource_group_name" {
 variable "myhealth_db_name" {
   default = "MyHealthDB"
 }
+
+variable "myhealth_container_name" {
+  default = "Records"
+}

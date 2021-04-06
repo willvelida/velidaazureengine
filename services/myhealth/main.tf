@@ -36,3 +36,13 @@ resource "azurerm_cosmosdb_sql_database" "db" {
 }
 
 # Create Containers for MyHealth in Cosmos DB
+resource "azurerm_cosmosdb_sql_container" "container" {
+    name = var.myhealth_container_name
+    resource_group_name = data.azurerm_cosmosdb_account.account.resource_group_name
+    account_name = data.azurerm_cosmosdb_account.account.name
+    database_name = azurerm_cosmosdb_sql_database.db.name
+    partition_key_path = "/DocumentType"
+    autoscale_settings {
+        max_throughput = 4000
+    }
+}
