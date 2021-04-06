@@ -22,3 +22,17 @@ module "resource_group" {
         "ApplicationName" = "MyHealth"
     }
 }
+
+data "azurerm_cosmosdb_account" "account" {
+    name = var.cosmos_db_account_name
+    resource_group_name = var.velida_engine_resource_group_name
+}
+
+# Create Database for MyHealth
+resource "azurerm_cosmosdb_sql_database" "db" {
+  name = var.myhealth_db_name
+  resource_group_name = data.azurerm_cosmosdb_account.account.resource_group_name
+  account_name = data.azurerm_cosmosdb_account.account.name
+}
+
+# Create Containers for MyHealth in Cosmos DB
