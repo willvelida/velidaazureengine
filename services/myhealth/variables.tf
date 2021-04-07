@@ -14,8 +14,12 @@ variable "cosmos_db_account_name" {
   default = "willvelidacosmosdb"
 }
 
-variable "velida_engine_resource_group_name" {
+variable "cosmos_db_resource_group_name" {
   default = "velidacosmosdb-rg"
+}
+
+variable "velida_generic_resource_group_name" {
+  default = "velidaazureengine-rg"
 }
 
 variable "myhealth_db_name" {
@@ -24,4 +28,12 @@ variable "myhealth_db_name" {
 
 variable "myhealth_container_name" {
   default = "Records"
+}
+
+variable "exception_topic_name" {
+  default = "myhealthexceptiontopic"
+}
+
+variable "service_bus_namespace" {
+  default = "velidaservicebus"
 }

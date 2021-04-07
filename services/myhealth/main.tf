@@ -25,7 +25,19 @@ module "resource_group" {
 
 data "azurerm_cosmosdb_account" "account" {
     name = var.cosmos_db_account_name
-    resource_group_name = var.velida_engine_resource_group_name
+    resource_group_name = var.cosmos_db_resource_group_name
+}
+
+data "azurerm_servicebus_namespace" "namespace" {
+  name = var.service_bus_namespace
+  resource_group_name = var.velida_generic_resource_group_name
+}
+
+module "myhealth_exception_topic" {
+  source = "../../modules/service_bus_topic"
+  topic_name = var.exception_topic_name
+  topic_resource_group = data.azurerm_servicebus_namespace.namespace.resource_group_name
+  topic_namespace = data.azurerm_servicebus_namespace.namespace.name
 }
 
 # Create Database for MyHealth
