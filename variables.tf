@@ -76,12 +76,6 @@ variable "service_bus_namespace_name" {
   type = string
 }
 
-variable "topic_name" {
-  default = "velidatopic"
-  description = "Name of the topic to provision in Service Bus"
-  type = string
-}
-
 variable "my_health_files_container_name" {
   default = "myhealthfiles"
   description = "Name of the container to hold all my health files"
