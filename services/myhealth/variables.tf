@@ -41,3 +41,7 @@ variable "service_bus_namespace" {
 variable "exception_subscription_name" {
   default = "myhealthexceptionsubscription"
 }
+
+variable "myhealth_app_service_plan_name" {
+  default = "myhealthappserviceplan"
+}

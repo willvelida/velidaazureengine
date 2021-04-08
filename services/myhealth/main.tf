@@ -23,6 +23,18 @@ module "resource_group" {
     }
 }
 
+# Create App Service Plan for all MyHealth Function Apps
+resource "azurerm_app_service_plan" "myhealthplan" {
+  name = var.myhealth_app_service_plan_name
+  location = module.resource_group.location
+  resource_group_name = module.resource_group.name
+  kind = "FunctionApp"
+  sku {
+    tier = "Dynamic"
+    size = "Y1"
+  }
+}
+
 data "azurerm_cosmosdb_account" "account" {
     name = var.cosmos_db_account_name
     resource_group_name = var.cosmos_db_resource_group_name
