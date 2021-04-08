@@ -33,3 +33,15 @@ variable "myhealth_exceptions_function_name" {
   description = "Name of the MyHealth.Exceptions App"
   type = string
 }
+
+variable "velida_key_vault" {
+  default = "willvelidakeyvault"
+}
+
+variable "velida_resource_group_name" {
+  default = "velidaazureengine-rg"
+}
+
+variable "tenant_id" {
+  default = "e60bb76c-8fda-4ed4-a354-4836e3bfcbc3"
+}

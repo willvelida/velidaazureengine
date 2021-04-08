@@ -25,6 +25,12 @@ module "resource_group" {
     }
 }
 
+# Importing my Key Vault
+data "azurerm_key_vault" "velidakeyvault" {
+  name = var.velida_key_vault
+  resource_group_name = var.velida_resource_group_name
+}
+
 # Importing the App Service Plan
 data "azurerm_app_service_plan" "appplan" {
     name = var.myhealth_app_service_plan
@@ -51,4 +57,19 @@ resource "azurerm_function_app" "myhealthexceptions" {
   app_service_plan_id = data.azurerm_app_service_plan.appplan.id
   storage_account_name = module.storage_account.storage_account_name
   storage_account_access_key = module.storage_account.primary_access_key
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  lifecycle {
+    ignore_changes = [app_settings]
+  }
+}
+
+resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
+  key_vault_id = data.azurerm_key_vault.velidakeyvault.id
+  tenant_id = var.tenant_id
+  object_id = azurerm_function_app.myhealthexceptions.identity[0].principal_id
+  secret_permissions = [ "get","list" ]
 }
