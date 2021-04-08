@@ -37,3 +37,7 @@ variable "exception_topic_name" {
 variable "service_bus_namespace" {
   default = "velidaservicebus"
 }
+
+variable "exception_subscription_name" {
+  default = "myhealthexceptionsubscription"
+}
