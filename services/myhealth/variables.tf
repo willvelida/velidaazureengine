@@ -22,6 +22,10 @@ variable "velida_generic_resource_group_name" {
   default = "velidaazureengine-rg"
 }
 
+variable "common_storage_account" {
+  default = "velidastorage"
+}
+
 variable "myhealth_db_name" {
   default = "MyHealthDB"
 }
@@ -44,4 +48,8 @@ variable "exception_subscription_name" {
 
 variable "myhealth_app_service_plan_name" {
   default = "myhealthappserviceplan"
+}
+
+variable "system_topic_name" {
+  default = "egmyhealth"
 }

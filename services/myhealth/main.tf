@@ -78,3 +78,24 @@ resource "azurerm_cosmosdb_sql_container" "container" {
         max_throughput = 4000
     }
 }
+
+# Import the storage account
+data "azurerm_storage_account" "velidastorage" {
+  name = var.common_storage_account
+  resource_group_name = var.velida_generic_resource_group_name
+}
+
+# Create an event grid topic for that storage account
+module "myhealth_eventgrid_system_topic" {
+  source = "../../modules/event_grid_system_topic"
+  system_topic_name = var.system_topic_name
+  resource_group_name = var.velida_generic_resource_group_name
+  location = module.resource_group.location
+  source_arm_resource_id = data.azurerm_storage_account.velidastorage.id
+  topic_type = "Microsoft.Storage.StorageAccounts"
+  tags = {
+    "Terraform" = "true"
+    "Resource-Specific" = "false"
+    "ApplicationName" = "MyHealth"
+  }
+}

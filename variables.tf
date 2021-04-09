@@ -82,12 +82,6 @@ variable "my_health_files_container_name" {
   type = string
 }
 
-variable "system_topic_name" {
-  default = "velidaeventgrid"
-  description = "Name of the Event Grid"
-  type = string
-}
-
 variable "app_insights_name" {
   default = "velidaapplicationinsights"
   type = string

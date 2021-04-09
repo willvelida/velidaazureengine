@@ -65,20 +65,6 @@ module "service_bus_namespace" {
   }
 }
 
-# Event Grid
-module "event_grid_system_topic" {
-  source = "./modules/event_grid_system_topic"
-  system_topic_name = var.system_topic_name
-  resource_group_name = module.resource_group.name
-  location = module.resource_group.location
-  source_arm_resource_id = module.storage_account.storage_account_id
-  topic_type = "Microsoft.Storage.StorageAccounts"
-  tags = {
-    "Environment" = "Dev"
-    "MainAzureEngineResource" = "True"
-  }
-}
-
 # App Insights
 module "app_insights" {
   source = "./modules/app_insights"
