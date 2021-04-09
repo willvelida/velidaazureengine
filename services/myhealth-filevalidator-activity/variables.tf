@@ -37,3 +37,7 @@ variable "myhealth_filevalidator_activity_function_name" {
   description = "Name of the MyHealth.FileValidator.Activity App"
   type = string
 }
+
+variable "tenant_id" {
+  default = "e60bb76c-8fda-4ed4-a354-4836e3bfcbc3"
+}
