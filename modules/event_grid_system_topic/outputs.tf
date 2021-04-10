@@ -7,3 +7,8 @@ output "metric_arm_resource_id" {
   description = "The Metric ARM Resource ID of the Event Grid System Topic"
   value = azurerm_eventgrid_system_topic.this.metric_arm_resource_id
 }
+
+output "system_topic_name" {
+  description = "The name of the Event Grid System Topic"
+  value = azurerm_eventgrid_system_topic.this.name
+}

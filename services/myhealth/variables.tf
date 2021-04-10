@@ -53,3 +53,15 @@ variable "myhealth_app_service_plan_name" {
 variable "system_topic_name" {
   default = "egmyhealth"
 }
+
+variable "filewatcher_activity_function_name" {
+  default = "famyhealthfilevalidatoractivity"
+}
+
+variable "filewatcher_activity_function_rg" {
+  default = "myhealthfilevalidatoractivity-rg"
+}
+
+variable "activity_event_subscription" {
+  default = "myhealthfwactivitysubscription"
+}

@@ -37,6 +37,12 @@ data "azurerm_app_service_plan" "appplan" {
     resource_group_name = var.myhealth_resource_group
 }
 
+# Import Service Bus Namespace
+data "azurerm_servicebus_namespace" "myhealthsb" {
+  name = var.service_bus_namespace
+  resource_group_name = var.velida_resource_group_name
+}
+
 # Create storage account for MyHealth.FileValidator.Activity
 module "storage_account" {
     source = "../../modules/storage_account"
@@ -73,4 +79,12 @@ resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
   tenant_id = var.tenant_id
   object_id = azurerm_function_app.myhealthexceptions.identity[0].principal_id
   secret_permissions = [ "get","list" ]
+}
+
+# Create Activity Topic in Service Bus Namespace
+module "activity_sb_topic" {
+    source = "../../modules/service_bus_topic"
+    topic_name = var.activity_topic_name
+    topic_resource_group = data.azurerm_servicebus_namespace.myhealthsb.resource_group_name
+    topic_namespace = data.azurerm_servicebus_namespace.myhealthsb.name   
 }

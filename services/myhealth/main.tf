@@ -101,5 +101,22 @@ module "myhealth_eventgrid_system_topic" {
 }
 
 # Import MyHealth.FileWatcher.Activity Function
+data "azurerm_function_app" "filewatcher_activity" {
+  name = var.filewatcher_activity_function_name
+  resource_group_name = var.filewatcher_activity_function_rg 
+}
 
 # Create Subscription using MyHealth.FileWatcher.Activity
+resource "azurerm_eventgrid_system_topic_event_subscription" "activitysub" {
+  name = var.activity_event_subscription
+  system_topic = module.myhealth_eventgrid_system_topic.system_topic_name
+  resource_group_name = var.velida_generic_resource_group_name
+
+  subject_filter {
+    subject_begins_with = "/blobServices/default/containers/myhealthfiles/activity"
+  }
+
+  webhook_endpoint {
+    url = "https://${data.azurerm_function_app.filewatcher_activity.default_hostname}"
+  }
+}
