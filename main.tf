@@ -116,6 +116,27 @@ resource "azurerm_log_analytics_workspace" "logs" {
   retention_in_days = 30
 }
 
+# Enable Logging on Key Vault
+resource "azurerm_monitor_diagnostic_setting" "keyvaultlogs" {
+  name = var.key_vault_logs
+  target_resource_id = azurerm_key_vault.keyvault.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.logs.id
+
+  log {
+    category = "AuditEvent"
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    retention_policy {
+      enabled = false
+    }
+  }
+}
+
 # Azure Storage Connection String
 resource "azurerm_key_vault_secret" "azure_storage_connection_string" {
   name = var.azure_storage_connection_string_secret

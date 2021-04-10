@@ -86,3 +86,8 @@ variable "app_insights_name" {
   default = "velidaapplicationinsights"
   type = string
 }
+
+variable "key_vault_logs" {
+  default = "velidakeyvaultlogs"
+  type = string
+}
