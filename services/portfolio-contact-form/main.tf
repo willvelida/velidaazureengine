@@ -78,4 +78,5 @@ resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
   tenant_id = azurerm_function_app.portfoliocontactform.identity[0].tenant_id
   object_id = azurerm_function_app.portfoliocontactform.identity[0].principal_id
   secret_permissions = [ "get","list" ]
+  key_permissions = [ "get" ]
 }
