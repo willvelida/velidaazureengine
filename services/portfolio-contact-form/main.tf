@@ -63,6 +63,7 @@ resource "azurerm_function_app" "portfoliocontactform" {
   app_service_plan_id = azurerm_app_service_plan.portfoliositeplan.id
   storage_account_name = module.storage_account.storage_account_name
   storage_account_access_key = module.storage_account.primary_access_key
+  version = "~3"
 
   identity {
     type = "SystemAssigned"
@@ -70,6 +71,12 @@ resource "azurerm_function_app" "portfoliocontactform" {
 
   lifecycle {
     ignore_changes = [app_settings]
+  }
+
+  site_config {
+    cors {
+      allowed_origins = [ "*" ]
+    }
   }
 }
 
