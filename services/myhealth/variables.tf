@@ -34,16 +34,16 @@ variable "myhealth_container_name" {
   default = "Records"
 }
 
-variable "exception_topic_name" {
-  default = "myhealthexceptiontopic"
+variable "activity_topic_name" {
+  default = "myhealthactivitytopic"
 }
 
 variable "service_bus_namespace" {
   default = "velidaservicebus"
 }
 
-variable "exception_subscription_name" {
-  default = "myhealthexceptionsubscription"
+variable "activity_subscription_name" {
+  default = "myhealthactivitysubscription"
 }
 
 variable "myhealth_app_service_plan_name" {
