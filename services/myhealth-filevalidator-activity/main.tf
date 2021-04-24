@@ -63,6 +63,7 @@ resource "azurerm_function_app" "myhealthexceptions" {
   app_service_plan_id = data.azurerm_app_service_plan.appplan.id
   storage_account_name = module.storage_account.storage_account_name
   storage_account_access_key = module.storage_account.primary_access_key
+  version = "~3"
 
   identity {
     type = "SystemAssigned"
