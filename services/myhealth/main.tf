@@ -83,39 +83,3 @@ data "azurerm_storage_account" "velidastorage" {
   name = var.common_storage_account
   resource_group_name = var.velida_generic_resource_group_name
 }
-
-# Create an event grid topic for that storage account
-module "myhealth_eventgrid_system_topic" {
-  source = "../../modules/event_grid_system_topic"
-  system_topic_name = var.system_topic_name
-  resource_group_name = var.velida_generic_resource_group_name
-  location = module.resource_group.location
-  source_arm_resource_id = data.azurerm_storage_account.velidastorage.id
-  topic_type = "Microsoft.Storage.StorageAccounts"
-  tags = {
-    "Terraform" = "true"
-    "Resource-Specific" = "false"
-    "ApplicationName" = "MyHealth"
-  }
-}
-
-# Import MyHealth.FileWatcher.Activity Function
-data "azurerm_function_app" "filewatcher_activity" {
-  name = var.filewatcher_activity_function_name
-  resource_group_name = var.filewatcher_activity_function_rg 
-}
-
-# Create Subscription using MyHealth.FileWatcher.Activity
-resource "azurerm_eventgrid_system_topic_event_subscription" "activitysub" {
-  name = var.activity_event_subscription
-  system_topic = module.myhealth_eventgrid_system_topic.system_topic_name
-  resource_group_name = var.velida_generic_resource_group_name
-
-  subject_filter {
-    subject_begins_with = "/blobServices/default/containers/myhealthfiles/activity"
-  }
-
-  azure_function_endpoint {
-    function_id = "${data.azurerm_function_app.filewatcher_activity.id}/functions/ValidateActivityFile"
-  }
-}
