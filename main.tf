@@ -150,14 +150,3 @@ resource "azurerm_key_vault_secret" "azure_storage_primary_access" {
   value = module.storage_account.primary_access_key
   key_vault_id = azurerm_key_vault.keyvault.id
 }
-
-# API Management
-resource "azurerm_api_management" "apimanagement" {
-  name = var.api_management_name
-  location = module.resource_group.location
-  resource_group_name = module.resource_group.name
-  publisher_name = "Will Velida"
-  publisher_email = "willvelida@hotmail.co.uk"
-
-  sku_name = "Developer_1"  
-}
