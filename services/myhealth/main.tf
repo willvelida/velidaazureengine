@@ -56,7 +56,7 @@ resource "azurerm_servicebus_subscription" "activitysubscription" {
   resource_group_name = var.velida_generic_resource_group_name
   namespace_name = var.service_bus_namespace
   topic_name = var.activity_topic_name
-  max_delivery_count = 1
+  max_delivery_count = 10
 }
 
 # Create Database for MyHealth
@@ -64,18 +64,6 @@ resource "azurerm_cosmosdb_sql_database" "db" {
   name = var.myhealth_db_name
   resource_group_name = data.azurerm_cosmosdb_account.account.resource_group_name
   account_name = data.azurerm_cosmosdb_account.account.name
-}
-
-# Creating container for MyHealth
-resource "azurerm_cosmosdb_sql_container" "container" {
-  name = var.myhealth_container_name
-  resource_group_name = data.azurerm_cosmosdb_account.account.resource_group_name
-  account_name = data.azurerm_cosmosdb_account.account.name
-  database_name = azurerm_cosmosdb_sql_database.db.name
-  partition_key_path = "/DocumentType"
-  autoscale_settings {
-    max_throughput = 4000
-  }
 }
 
 # Import the storage account
