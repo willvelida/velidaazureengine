@@ -45,17 +45,35 @@ data "azurerm_servicebus_namespace" "namespace" {
   resource_group_name = var.velida_generic_resource_group_name
 }
 
+# Import Activity Topic
 data "azurerm_servicebus_topic" "topic" {
   name = var.activity_topic_name
   resource_group_name = var.velida_generic_resource_group_name
   namespace_name = var.service_bus_namespace
 }
 
+# Create Subscription to Activity Topic
 resource "azurerm_servicebus_subscription" "activitysubscription" {
   name = var.activity_subscription_name
   resource_group_name = var.velida_generic_resource_group_name
   namespace_name = var.service_bus_namespace
   topic_name = var.activity_topic_name
+  max_delivery_count = 10
+}
+
+# Import Sleep Topic
+data "azurerm_servicebus_topic" "sleeptopic" {
+  name = var.sleep_topic_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+}
+
+# Create Subscription to Sleep Topic
+resource "azurerm_servicebus_subscription" "sleepsubscription" {
+  name = var.sleep_subscription_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+  topic_name = var.sleep_topic_name
   max_delivery_count = 10
 }
 
@@ -72,6 +90,7 @@ data "azurerm_storage_account" "velidastorage" {
   resource_group_name = var.velida_generic_resource_group_name
 }
 
+# Create DuplicateFiles Storage Table
 resource "azurerm_storage_table" "activityfileduplicate" {
   name = var.file_duplicate_table_name
   storage_account_name = data.azurerm_storage_account.velidastorage.name

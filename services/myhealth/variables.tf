@@ -38,12 +38,20 @@ variable "activity_topic_name" {
   default = "myhealthactivitytopic"
 }
 
+variable "sleep_topic_name" {
+  default = "myhealthsleeptopic"
+}
+
 variable "service_bus_namespace" {
   default = "velidaservicebus"
 }
 
 variable "activity_subscription_name" {
   default = "myhealthactivitysubscription"
+}
+
+variable "sleep_subscription_name" {
+  default = "myhealthsleepsubscription"
 }
 
 variable "myhealth_app_service_plan_name" {
