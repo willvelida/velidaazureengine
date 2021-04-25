@@ -49,3 +49,7 @@ variable "activity_subscription_name" {
 variable "myhealth_app_service_plan_name" {
   default = "myhealthappserviceplan"
 }
+
+variable "file_duplicate_table_name" {
+  default = "DuplicateFiles"
+}

@@ -71,3 +71,8 @@ data "azurerm_storage_account" "velidastorage" {
   name = var.common_storage_account
   resource_group_name = var.velida_generic_resource_group_name
 }
+
+resource "azurerm_storage_table" "activityfileduplicate" {
+  name = var.file_duplicate_table_name
+  storage_account_name = data.azurerm_storage_account.velidastorage.name
+}
