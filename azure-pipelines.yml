@@ -1,0 +1,22 @@
+trigger:
+  - main
+
+variables:
+  serviceConnection: 'azureConnectionName'
+  azureLocation: 'australiaeast'
+  terraformWorkingDirectory: '$(System.DefaultWorkingDirectory)'
+  terraformVersion: '0.12.25'
+
+stages:
+  - stage: validate
+    jobs:
+      - job: validate
+        continueOnError: false
+        pool: unbuntu-20.04
+        steps:
+          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+            displayName: 'Install Terraform'
+            inputs:
+              terraformVersion: '$(terraformVersion)'
+
+
