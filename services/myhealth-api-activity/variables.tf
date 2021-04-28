@@ -32,7 +32,7 @@ variable "function_storage_name" {
   type = string
 }
 
-variable "myhealth_dbsink_activity_function_name" {
+variable "myhealth_api_activity_function_name" {
   default = "famyhealthapiactivity"
   description = "Name of the MyHealth.API.Activity App"
   type = string
