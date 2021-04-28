@@ -12,7 +12,7 @@ stages:
     jobs:
       - job: validate
         continueOnError: false
-        pool: ubuntu-latest
+        pool: 'vs2017-win2016'
         steps:
           - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
             displayName: 'Install Terraform'
