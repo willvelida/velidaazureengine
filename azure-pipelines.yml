@@ -6,13 +6,14 @@ variables:
   azureLocation: 'australiaeast'
   terraformWorkingDirectory: '$(System.DefaultWorkingDirectory)'
   terraformVersion: '0.12.25'
+  vmImage: 'vs2017-win2016'
 
 stages:
   - stage: validate
     jobs:
       - job: validate
         continueOnError: false
-        pool: 'vs2017-win2016'
+        pool: $(vmImage)
         steps:
           - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
             displayName: 'Install Terraform'
