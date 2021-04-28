@@ -27,6 +27,7 @@ module "resource_group" {
   resource_group_tags = {
     "Terraform" = "true"
     "Environment" = "Dev"
+    "MainAzureEngineResource" = "True"
   }
 }
 
