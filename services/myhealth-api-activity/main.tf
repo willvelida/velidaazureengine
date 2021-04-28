@@ -66,11 +66,3 @@ resource "azurerm_function_app" "activityapi" {
     ignore_changes = [app_settings]
   }
 }
-
-# Create Key Vault Access Policy for Key Vault
-resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
-  key_vault_id = data.azurerm_key_vault.velidakeyvault.id
-  tenant_id = var.tenant_id
-  object_id = azurerm_function_app.activityapi.identity[0].principal_id
-  secret_permissions = [ "get","list" ]
-}
