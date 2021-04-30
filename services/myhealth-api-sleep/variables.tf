@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "myhealthapiactivity-rg"
+  default = "myhealthapisleep-rg"
 }
 
 variable "resource_group_location" {
