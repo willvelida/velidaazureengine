@@ -45,6 +45,13 @@ data "azurerm_servicebus_namespace" "namespace" {
   resource_group_name = var.velida_generic_resource_group_name
 }
 
+# Create Exception Queue
+resource "azurerm_servicebus_queue" "exceptionqueue" {
+  name = var.exception_queue_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+}
+
 # Import Activity Topic
 data "azurerm_servicebus_topic" "topic" {
   name = var.activity_topic_name

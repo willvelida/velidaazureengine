@@ -61,3 +61,7 @@ variable "myhealth_app_service_plan_name" {
 variable "file_duplicate_table_name" {
   default = "DuplicateFiles"
 }
+
+variable "exception_queue_name" {
+  default = "myhealthexceptionqueue"
+}
