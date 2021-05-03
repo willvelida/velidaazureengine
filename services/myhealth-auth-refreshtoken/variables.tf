@@ -1,4 +1,4 @@
-ariable "resource_group_name" {
+variable "resource_group_name" {
   default = "myhealthauthrefreshtoken-rg"
 }
 
