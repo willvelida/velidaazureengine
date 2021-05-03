@@ -27,7 +27,7 @@ variable "myhealth_resource_group" {
 }
 
 variable "function_storage_name" {
-  default = "samyhealthauthrefreshtoken"
+  default = "samyhealthauthrt"
   description = "Name of the storage account for MyHealth.Auth.RefreshToken"
   type = string
 }
