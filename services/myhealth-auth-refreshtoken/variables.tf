@@ -32,7 +32,7 @@ variable "function_storage_name" {
   type = string
 }
 
-variable "myhealth_api_activity_function_name" {
+variable "myhealth_auth_refreshtoken_function_name" {
   default = "famyhealthauthrefreshtoken"
   description = "Name of the MyHealth.Auth.RefreshToken App"
   type = string
