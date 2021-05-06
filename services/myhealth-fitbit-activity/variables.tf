@@ -32,7 +32,7 @@ variable "function_storage_name" {
   type = string
 }
 
-variable "myhealth_fitbit_sleep_function_name" {
+variable "myhealth_fitbit_activity_function_name" {
   default = "famyhealthfitbitactivity"
   description = "Name of the MyHealth.Fitbit.Sleep App"
   type = string
