@@ -46,6 +46,6 @@ variable "service_bus_namespace" {
   default = "velidaservicebus"
 }
 
-variable "activity_topic_name" {
-  default = "myhealthactivitytopic"
+variable "nutrition_topic_name" {
+  default = "myhealthnutritiontopic"
 }
