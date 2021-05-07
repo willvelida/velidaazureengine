@@ -27,7 +27,7 @@ variable "myhealth_resource_group" {
 }
 
 variable "function_storage_name" {
-  default = "samyhealthfitbitnutrition"
+  default = "samyhealthfitbitnutrit"
   description = "Name of the storage account for MyHealth.Fitbit.Nutrition"
   type = string
 }
