@@ -27,7 +27,7 @@ variable "myhealth_resource_group" {
 }
 
 variable "function_storage_name" {
-  default = "samyhealthdbsinknutrition"
+  default = "samyhealthdbnutrition"
   description = "Name of the storage account for MyHealth.DBSink.Nutrition"
   type = string
 }
