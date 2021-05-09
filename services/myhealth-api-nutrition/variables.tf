@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "myhealthapiactivity-rg"
+  default = "myhealthapinutrition-rg"
 }
 
 variable "resource_group_location" {
@@ -27,14 +27,14 @@ variable "myhealth_resource_group" {
 }
 
 variable "function_storage_name" {
-  default = "samyhealthapiactivity"
-  description = "Name of the storage account for MyHealth.API.Activity"
+  default = "samyhealthapinutrition"
+  description = "Name of the storage account for MyHealth.API.Nutrition"
   type = string
 }
 
 variable "myhealth_api_activity_function_name" {
-  default = "famyhealthapiactivity"
-  description = "Name of the MyHealth.API.Activity App"
+  default = "famyhealthapinutrition"
+  description = "Name of the MyHealth.API.Nutrition App"
   type = string
 }
 
