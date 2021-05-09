@@ -32,7 +32,7 @@ variable "function_storage_name" {
   type = string
 }
 
-variable "myhealth_api_activity_function_name" {
+variable "myhealth_api_nutrition_function_name" {
   default = "famyhealthapinutrition"
   description = "Name of the MyHealth.API.Nutrition App"
   type = string
