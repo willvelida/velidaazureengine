@@ -84,6 +84,22 @@ resource "azurerm_servicebus_subscription" "sleepsubscription" {
   max_delivery_count = 10
 }
 
+# Import Sleep Topic
+data "azurerm_servicebus_topic" "nutritiontopic" {
+  name = var.nutrition_topic_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+}
+
+# Create Subscription to Sleep Topic
+resource "azurerm_servicebus_subscription" "nutritionsubscription" {
+  name = var.nutrition_subscription_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+  topic_name = var.nutrition_topic_name
+  max_delivery_count = 10
+}
+
 # Create Database for MyHealth
 resource "azurerm_cosmosdb_sql_database" "db" {
   name = var.myhealth_db_name

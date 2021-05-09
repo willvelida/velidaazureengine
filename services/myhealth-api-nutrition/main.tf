@@ -2,7 +2,7 @@ terraform {
     backend "azure" {
       resource_group_name = "velidarg"
       storage_account_name = "velidaterraform"
-      container_name = "myhealthapiactivitytfstate"
+      container_name = "myhealthapinutritiontfstate"
       key = "terraform.tfstate"
     }
 }
@@ -20,7 +20,7 @@ module "resource_group" {
         "Terraform" = "true"
         "Resource-Specific" = "false"
         "ApplicationName" = "MyHealth"
-        "ServiceName" = "MyHealth.API.Activity"
+        "ServiceName" = "MyHealth.API.Nutrition"
     }  
 }
 
@@ -36,7 +36,7 @@ data "azurerm_app_service_plan" "appplan" {
     resource_group_name = var.myhealth_resource_group
 }
 
-# Create storage account for MyHealth.API.Activity
+# Create storage account for MyHealth.API.Nutrition
 module "storage_account" {
     source = "../../modules/storage_account"
     storage_account_name = var.function_storage_name
@@ -48,9 +48,9 @@ module "storage_account" {
     is_hns_enabled = "false"
 }
 
-# Create Function App for MyHealth.API.Activity
-resource "azurerm_function_app" "activityapi" {
-  name = var.myhealth_api_activity_function_name
+# Create Function App for MyHealth.API.Nutrition
+resource "azurerm_function_app" "nutritionapi" {
+  name = var.myhealth_api_nutrition_function_name
   location = module.resource_group.location
   resource_group_name = module.resource_group.name
   app_service_plan_id = data.azurerm_app_service_plan.appplan.id
@@ -71,6 +71,6 @@ resource "azurerm_function_app" "activityapi" {
 resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
   key_vault_id = data.azurerm_key_vault.velidakeyvault.id
   tenant_id = var.tenant_id
-  object_id = azurerm_function_app.activityapi.identity[0].principal_id
+  object_id = azurerm_function_app.nutritionapi.identity[0].principal_id
   secret_permissions = [ "get","list" ]
 }

@@ -54,6 +54,14 @@ variable "sleep_subscription_name" {
   default = "myhealthsleepsubscription"
 }
 
+variable "nutrition_topic_name" {
+  default = "myhealthnutritiontopic"
+}
+
+variable "nutrition_subscription_name" {
+  default = "myhealthnutritionsubscription"
+}
+
 variable "myhealth_app_service_plan_name" {
   default = "myhealthappserviceplan"
 }
