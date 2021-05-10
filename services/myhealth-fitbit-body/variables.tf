@@ -41,3 +41,11 @@ variable "myhealth_fitbit_body_function_name" {
 variable "tenant_id" {
   default = "e60bb76c-8fda-4ed4-a354-4836e3bfcbc3"
 }
+
+variable "service_bus_namespace" {
+  default = "velidaservicebus"
+}
+
+variable "body_topic_name" {
+  default = "myhealthbodytopic"
+}

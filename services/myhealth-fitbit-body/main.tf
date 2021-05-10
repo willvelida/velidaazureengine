@@ -74,3 +74,15 @@ resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
   object_id = azurerm_function_app.fitbitbody.identity[0].principal_id
   secret_permissions = [ "get","list", ]
 }
+
+data "azurerm_servicebus_namespace" "myhealthsb" {
+  name = var.service_bus_namespace
+  resource_group_name = var.velida_resource_group_name
+}
+
+module "body_sb_topic" {
+    source = "../../modules/service_bus_topic"
+    topic_name = var.body_topic_name
+    topic_resource_group = data.azurerm_servicebus_namespace.myhealthsb.resource_group_name
+    topic_namespace = data.azurerm_servicebus_namespace.myhealthsb.name   
+}
