@@ -62,6 +62,14 @@ variable "nutrition_subscription_name" {
   default = "myhealthnutritionsubscription"
 }
 
+variable "body_topic_name" {
+  default = "myhealthbodytopic"
+}
+
+variable "body_subscription_name" {
+  default = "myhealthbodysubscription"
+}
+
 variable "myhealth_app_service_plan_name" {
   default = "myhealthappserviceplan"
 }

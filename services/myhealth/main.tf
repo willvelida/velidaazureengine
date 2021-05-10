@@ -84,19 +84,35 @@ resource "azurerm_servicebus_subscription" "sleepsubscription" {
   max_delivery_count = 10
 }
 
-# Import Sleep Topic
+# Import Nutrition Topic
 data "azurerm_servicebus_topic" "nutritiontopic" {
   name = var.nutrition_topic_name
   resource_group_name = var.velida_generic_resource_group_name
   namespace_name = var.service_bus_namespace
 }
 
-# Create Subscription to Sleep Topic
+# Create Subscription to Nutrition Topic
 resource "azurerm_servicebus_subscription" "nutritionsubscription" {
   name = var.nutrition_subscription_name
   resource_group_name = var.velida_generic_resource_group_name
   namespace_name = var.service_bus_namespace
   topic_name = var.nutrition_topic_name
+  max_delivery_count = 10
+}
+
+# Import Body Topic
+data "azurerm_servicebus_topic" "bodytopic" {
+  name = var.body_topic_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+}
+
+# Create Body to Nutrition Topic
+resource "azurerm_servicebus_subscription" "bodysubscription" {
+  name = var.body_subscription_name
+  resource_group_name = var.velida_generic_resource_group_name
+  namespace_name = var.service_bus_namespace
+  topic_name = var.body_topic_name
   max_delivery_count = 10
 }
 
