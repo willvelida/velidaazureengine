@@ -143,5 +143,5 @@ resource "azurerm_api_management" "main" {
   publisher_name = var.publisher_name
   publisher_email = var.publisher_email
 
-  sku_name = "Consumption_1"
+  sku_name = "Consumption_0"
 }
