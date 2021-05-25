@@ -81,3 +81,15 @@ variable "file_duplicate_table_name" {
 variable "exception_queue_name" {
   default = "myhealthexceptionqueue"
 }
+
+variable "apim_name" {
+  default = "myhealthapimportal"
+}
+
+variable "publisher_name" {
+  default = "MyHealth"
+}
+
+variable "publisher_email" {
+  default = "willvelida@hotmail.co.uk"
+}
