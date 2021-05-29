@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "willvelidapersonalwebsite"
+        },
+        "location": {
+            "value": "Australia East"
+        },   
+        "sku": {
+            "value": "Free"
+        },
+        "skucode": {
+            "value": "Free"
+        },
+        "repositoryUrl": {
+            "value": "https://github.com/willvelida/Personal.UI"
+        },
+        "branch": {
+            "value": "main"
+        },
+        "repositoryToken": {
+            "value": "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" 
+        },
+        "appLocation": {
+            "value": "/"
+        },
+        "apiLocation": {
+            "value": ""
+        },
+        "appArtifactLocation": {
+            "value": "public"
+        },
+        "resourceTags": {
+            "value": {
+                "Environment": "Production",
+                "ApplicationName": "PersonalWebsite"
+            }
+        }
+    }
+}
