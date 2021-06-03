@@ -5,10 +5,15 @@ terraform {
       container_name = "myhealthapimtfstate"
       key = "terraform.tfstate"
     }
+    required_providers {
+      azurerm = {
+        version = "=2.46.0"
+        source = "hashicorp/azurerm"
+      }
+    }
 }
 
 provider "azurerm" {
-  version = "~>2.0"
   features {}
 }
 
