@@ -145,3 +145,10 @@ resource "azurerm_api_management" "main" {
 
   sku_name = "Consumption_0"
 }
+
+# create azure app configuration
+resource "azurerm_app_configuration" "appconf" {
+  name = var.myhealth_app_config
+  resource_group_name = var.resource_group_name
+  location = var.resource_group_location
+}

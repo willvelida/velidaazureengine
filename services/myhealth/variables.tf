@@ -93,3 +93,7 @@ variable "publisher_name" {
 variable "publisher_email" {
   default = "willvelida@hotmail.co.uk"
 }
+
+variable "myhealth_app_config" {
+  default = "myhealthappconfig"
+}
