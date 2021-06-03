@@ -1,10 +1,10 @@
 terraform {
-  backend "azure" {
+    backend "azure" {
       resource_group_name = "velidarg"
       storage_account_name = "velidaterraform"
       container_name = "myhealthapimtfstate"
-      key = "terraform.tstate"
-  }
+      key = "terraform.tfstate"
+    }
 }
 
 provider "azurerm" {
