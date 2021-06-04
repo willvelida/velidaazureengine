@@ -1,13 +1,4 @@
 terraform {
-    backend "azure" {
-      resource_group_name = "velidarg"
-      storage_account_name = "velidaterraform"
-      container_name = "myhealthapimtfstate"
-      key = "terraform.tfstate"
-    }
-}
-
-terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
