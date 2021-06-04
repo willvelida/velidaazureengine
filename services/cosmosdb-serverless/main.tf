@@ -1,5 +1,5 @@
 terraform {
-  backend "azure" {
+  backend "azurerm" {
       resource_group_name = "velidarg"
       storage_account_name = "velidaterraform"
       container_name = "cosmosserverlesstfstate"
@@ -7,8 +7,16 @@ terraform {
   }
 }
 
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "=2.48.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "~>2.0"
   features {}
 }
 
