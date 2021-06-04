@@ -18,12 +18,6 @@ data "azurerm_key_vault" "keyvault" {
   resource_group_name = var.external_resource_group_name
 }
 
-# Referencing Log Analytics into terraform file
-data "azurerm_log_analytics_workspace" "loganalytics" {
-  name = "velidaloganalytics"
-  resource_group_name = var.external_resource_group_name
-}
-
 # Reusing the resource_group module
 module "resource_group" {
     source = "../../modules/resource_group"
@@ -94,41 +88,3 @@ resource "azurerm_key_vault_secret" "cosmosdbprimarykey" {
   value = azurerm_cosmosdb_account.db.primary_key
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
-
-# Adding metrics to Log Analytics
-resource "azurerm_monitor_diagnostic_setting" "cosmosdbdiagnostics" {
-  name = var.cosmos_log_analytics_settings
-  target_resource_id = azurerm_cosmosdb_account.db.id
-  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.loganalytics.id
-
-  log {
-    category = "DataPlaneRequests"
-    enabled = true
-  }
-
-  log {
-    category = "QueryRuntimeStatistics"
-    enabled = true
-  }
-
-  log {
-    category = "PartitionKeyStatistics"
-    enabled = true
-  }
-
-  log {
-    category = "PartitionKeyRUConsumption"
-    enabled = true
-  }
-
-  log {
-    category = "ControlPlaneRequests"
-    enabled = true
-  }
-
-  metric {
-    category = "Requests"
-    enabled = true
-  }
-}
-
