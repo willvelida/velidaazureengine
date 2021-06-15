@@ -1,7 +1,7 @@
-param apimName string = 'myhealthapiportal'
-param apimLocation string = 'australiaeast'
-param publisherName string = 'MyHealth API Portal'
-param publisherEmail string = 'willvelida@hotmail.co.uk'
+param apimName string
+param apimLocation string
+param publisherName string
+param publisherEmail string
 
 resource myhealthapim 'Microsoft.ApiManagement/service@2019-12-01' = {
   name: apimName
