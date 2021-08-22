@@ -2,7 +2,7 @@ terraform {
     required_providers {
         azurerm = {
             source = "hashicorp/azurerm"
-            vversion = "2.46.0"
+            version = "2.46.0"
         }
     }
   backend "azure" {
@@ -33,6 +33,7 @@ resource "azurerm_app_service_plan" "myhealthplan" {
     location = module.resource_group.location
     resource_group_name = module.resource_group.name
     kind = "Linux"
+    reserved = true
     sku {
         tier = "Dynamic"
         size = "Y1"
