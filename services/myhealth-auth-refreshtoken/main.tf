@@ -1,4 +1,10 @@
 terraform {
+    required_providers {
+      azurerm = {
+        source = "hashicorp/azurerm"
+        version = "2.46.0"
+      }
+    }
     backend "azure" {
       resource_group_name = "velidarg"
       storage_account_name = "velidaterraform"
@@ -8,7 +14,6 @@ terraform {
 }
 
 provider "azurerm" {
-  version = "~>2.0"
   features {}
 }
 
@@ -33,7 +38,7 @@ data "azurerm_key_vault" "velidakeyvault" {
 # Import App Service Plan
 data "azurerm_app_service_plan" "appplan" {
     name = var.myhealth_app_service_plan
-    resource_group_name = var.myhealth_resource_group
+    resource_group_name = var.myhealth_app_resource_group
 }
 
 # Create storage account for MyHealth.FileValidator.Activity
@@ -56,6 +61,7 @@ resource "azurerm_function_app" "authrefresh" {
   app_service_plan_id = data.azurerm_app_service_plan.appplan.id
   storage_account_name = module.storage_account.storage_account_name
   storage_account_access_key = module.storage_account.primary_access_key
+  os_type = "linux"
   version = "~3"
 
   identity {
