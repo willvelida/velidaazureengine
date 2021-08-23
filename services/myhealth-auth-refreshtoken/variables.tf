@@ -15,7 +15,7 @@ variable "velida_resource_group_name" {
 }
 
 variable "myhealth_app_service_plan" {
-  default = "myhealthappserviceplan"
+  default = "myhealthappplan"
   description = "Name of the App Service Plan for MyHealth"
   type = string
 }
