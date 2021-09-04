@@ -3,7 +3,7 @@ variable "resource_group_name" {
 }
 
 variable "resource_group_location" {
-  default = "australiaeast"
+  default = "westus2"
 }
 
 variable "website_name" {
