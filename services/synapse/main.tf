@@ -53,6 +53,6 @@ resource "azurerm_synapse_workspace" "synapse" {
     resource_group_name = module.resource_group.name
     location = module.resource_group.location
     storage_data_lake_gen2_filesystem_id = module.data_lake_gen2_filesystem.filesystem_id
-    sql_administrator_login = "willvelida"
-    sql_administrator_login_password = "Seacow2019Toby9!"
+    sql_administrator_login = var.synapse_sql_username
+    sql_administrator_login_password = var.synapse_sql_password
 }

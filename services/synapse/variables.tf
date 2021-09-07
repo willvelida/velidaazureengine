@@ -27,3 +27,9 @@ variable "synapse_workspace_name" {
   description = "Name of the Synapse Workspace"
   type = string
 }
+
+variable "synapse_sql_username" {
+}
+
+variable "synapse_sql_password" {
+}
