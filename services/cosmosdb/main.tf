@@ -55,6 +55,10 @@ resource "azurerm_cosmosdb_account" "db" {
   consistency_policy {
     consistency_level = "Session"
   }
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 # Adding Cosmos DB Secrets to Key Vault
