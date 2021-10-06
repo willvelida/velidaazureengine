@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "velidaacr-rg"
+  default = "velidaaks-rg"
 }
 
 variable "resource_group_location" {
