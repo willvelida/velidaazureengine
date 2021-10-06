@@ -15,6 +15,6 @@ variable "velida_k8s_dns_prefix" {
 }
 
 variable "velida_k8s_node_pool_name" {
-  default = "velidaaksnodepool"
+  default = "velidapool"
 }
 
