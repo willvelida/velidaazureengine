@@ -27,12 +27,22 @@ module "resource_group" {
     }  
 }
 
+module "node_resource_group" {
+  source = "../../modules/resource_group"
+    resource_group_name = var.node_resource_group_name
+    resource_group_location = var.resource_group_location
+    resource_group_tags = {
+        "Terraform" = "true"
+        "Resource-Specific" = "true"
+    }
+}
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name = var.velida_k8s_cluster_name
   location = module.resource_group.location
   resource_group_name = module.resource_group.name
   dns_prefix = var.velida_k8s_dns_prefix
-  node_resource_group = module.resource_group.name
+  node_resource_group = module.node_resource_group_name.name
   automatic_channel_upgrade = "stable" 
 
   default_node_pool {

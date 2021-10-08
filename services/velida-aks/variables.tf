@@ -2,6 +2,10 @@ variable "resource_group_name" {
   default = "velidaaks-rg"
 }
 
+variable "node_resource_group_name" {
+  default = "velidaaksnodepool-rg"
+}
+
 variable "resource_group_location" {
   default = "australiaeast"
 }
