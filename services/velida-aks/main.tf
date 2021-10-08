@@ -33,6 +33,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   resource_group_name = module.resource_group.name
   dns_prefix = var.velida_k8s_dns_prefix
   node_resource_group = module.resource_group.name
+  automatic_channel_upgrade = "stable" 
 
   default_node_pool {
     name = var.velida_k8s_node_pool_name
