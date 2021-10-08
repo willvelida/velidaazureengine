@@ -54,12 +54,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     enabled = true
   }
 
-  addon_profile {
-    kube_dashboard {
-      enabled = true
-    }
-  }
-
   tags = {
     "Environment" = "Production"
   }
