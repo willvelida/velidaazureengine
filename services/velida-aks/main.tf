@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   location = module.resource_group.location
   resource_group_name = module.resource_group.name
   dns_prefix = var.velida_k8s_dns_prefix
-  node_resource_group = module.node_resource_group_name.name
+  node_resource_group = module.node_resource_group.name
   automatic_channel_upgrade = "stable" 
 
   default_node_pool {
