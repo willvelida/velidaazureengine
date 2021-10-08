@@ -22,3 +22,11 @@ variable "velida_k8s_node_pool_name" {
   default = "velidapool"
 }
 
+variable "acr_name" {
+    default = "velidaacr"
+}
+
+variable "acr_resource_group_name" {
+  default = "velidaacr-rg"
+}
+

@@ -27,6 +27,11 @@ module "resource_group" {
     }  
 }
 
+data "azurerm_container_registry" "acr" {
+  name = var.acr_name
+  resource_group_name = var.acr_resource_group_name
+}
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name = var.velida_k8s_cluster_name
   location = module.resource_group.location
@@ -45,7 +50,23 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     type = "SystemAssigned"
   }
 
+  role_based_access_control {
+    enabled = true
+  }
+
+  addon_profile {
+    kube_dashboard {
+      enabled = true
+    }
+  }
+
   tags = {
     "Environment" = "Production"
   }
+}
+
+resource "azurerm_role_assignment" "kubweb_to_acr" {
+  scope = data.azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id = azurerm_kubernetes_cluster.cluster.identity[0].object_id
 }
