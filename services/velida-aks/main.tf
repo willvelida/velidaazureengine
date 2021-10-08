@@ -68,5 +68,5 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 resource "azurerm_role_assignment" "kubweb_to_acr" {
   scope = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id = azurerm_kubernetes_cluster.cluster.identity[0].object_id
+  principal_id = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
 }
