@@ -77,6 +77,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
       enabled = true
       log_analytics_workspace_id = data.azurerm_log_analytics_workspace.loganalytics.id
     }
+    http_application_routing {
+      enabled = true
+    }
   }
 
   tags = {
