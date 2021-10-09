@@ -30,3 +30,11 @@ variable "acr_resource_group_name" {
   default = "velidaacr-rg"
 }
 
+variable "log_analytics_name" {
+  default = "velidaloganalytics"
+}
+
+variable "velida_resource_group" {
+  default = "velidaazureengine-rg"
+}
+

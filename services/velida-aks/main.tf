@@ -32,6 +32,24 @@ data "azurerm_container_registry" "acr" {
   resource_group_name = var.acr_resource_group_name
 }
 
+data "azurerm_log_analytics_workspace" "loganalytics" {
+  name = var.log_analytics_name
+  resource_group_name = var.velida_resource_group
+}
+
+resource "azurerm_log_analytics_solution" "containerinsights" {
+  solution_name = "ContainerInsights"
+  location = data.azurerm_log_analytics_workspace.loganalytics.location
+  resource_group_name = data.azurerm_log_analytics_workspace.loganalytics.resource_group_name
+  workspace_resource_id = data.azurerm_log_analytics_workspace.loganalytics.id
+  workspace_name = data.azurerm_log_analytics_workspace.loganalytics.name
+
+  plan {
+    publisher = "Microsoft"
+    product = "OMSGallery/ContainerInsights"
+  }
+}
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name = var.velida_k8s_cluster_name
   location = module.resource_group.location
@@ -52,6 +70,13 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   role_based_access_control {
     enabled = true
+  }
+
+  addon_profile {
+    oms_agent {
+      enabled = true
+      log_analytics_workspace_id = data.azurerm_log_analytics_workspace.loganalytics.id
+    }
   }
 
   tags = {
