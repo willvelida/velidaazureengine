@@ -2,7 +2,7 @@ terraform {
     required_providers {
       azurerm = {
         source = "hashicorp/azurerm"
-        version = "2.46.0"
+        version = "~>2.0"
       }
     }
     backend "azure" {
@@ -35,6 +35,6 @@ resource "azurerm_api_management" "apim" {
   resource_group_name = module.resource_group.name
   publisher_name = var.myhealth_publisher_name
   publisher_email = var.myhealth_publisher_email
-  
+
   sku_name = "Developer_1"
 }
