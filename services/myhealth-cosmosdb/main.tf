@@ -52,6 +52,8 @@ resource "azurerm_cosmosdb_account" "account" {
   public_network_access_enabled = false
   ip_range_filter = var.ip_rules
 
+  local_authentication_disabled = true
+
   enable_automatic_failover = true
 
   geo_location {
