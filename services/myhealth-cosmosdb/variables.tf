@@ -50,6 +50,10 @@ variable "myhealth_db_primary_key" {
   default = "myhealthprimarykey"
 }
 
+variable "myhealth_db_secondary_key" {
+  default = "myhealthsecondarykey"
+}
+
 variable "myhealth_db_write_endpoint" {
   default = "myhealthcosmoswriteendpoint"
 }
