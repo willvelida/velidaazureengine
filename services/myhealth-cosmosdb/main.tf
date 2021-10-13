@@ -110,9 +110,39 @@ resource "azurerm_key_vault_secret" "cosmosendpoint" {
  key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+resource "azurerm_key_vault_secret" "cosmosreadendpoint" {
+  name = var.myhealth_db_read_endpoint
+  value = azurerm_cosmosdb_account.account.read_endpoints[0]
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmoswriteendpoint" {
+  name = var.myhealth_db_write_endpoint
+  value = azurerm_cosmosdb_account.account.write_endpoints[0]
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 resource "azurerm_key_vault_secret" "cosmosprimarykey" {
   name = var.myhealth_db_primary_key
   value = azurerm_cosmosdb_account.account.primary_key
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmossecondarykey" {
+  name = var.myhealth_db_secondary_key
+  value = azurerm_cosmosdb_account.account.secondary_key
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmosprimaryreadonlykey" {
+  name = var.myhealth_db_primary_readonly_key
+  value = azurerm_cosmosdb_account.account.primary_readonly_key
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "cosmossecondaryreadonlykey" {
+  name = var.myhealth_db_secondary_readonly_key
+  value = azurerm_cosmosdb_account.account.secondary_readonly_key
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 

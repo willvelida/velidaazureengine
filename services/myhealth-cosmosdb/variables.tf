@@ -42,8 +42,24 @@ variable "myhealth_db_endpoint" {
   default = "myhealthcosmosendpoint"
 }
 
+variable "myhealth_db_read_endpoint" {
+  default = "myhealthcosmosreadendpoint"
+}
+
 variable "myhealth_db_primary_key" {
   default = "myhealthprimarykey"
+}
+
+variable "myhealth_db_write_endpoint" {
+  default = "myhealthcosmoswriteendpoint"
+}
+
+variable "myhealth_db_primary_readonly_key" {
+  default = "myhealthcosmosprimaryreadkey"
+}
+
+variable "myhealth_db_secondary_readonly_key" {
+  default = "myhealthcosmossecondaryreadkey"
 }
 
 variable "myhealth_diagnostics_settings" {
