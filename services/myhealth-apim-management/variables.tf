@@ -7,7 +7,7 @@ variable "resource_group_location" {
 }
 
 variable "myhealth_apim_name" {
-  default = "myhealthapim"
+  default = "myhealthapiportal"
 }
 
 variable "myhealth_publisher_name" {
