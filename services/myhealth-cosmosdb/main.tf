@@ -52,7 +52,7 @@ resource "azurerm_cosmosdb_account" "account" {
   public_network_access_enabled = false
   ip_range_filter = var.ip_rules
 
-  local_authentication_disabled = true
+  local_authentication_disabled = false
 
   enable_automatic_failover = true
 
