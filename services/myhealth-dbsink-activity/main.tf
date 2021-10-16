@@ -101,6 +101,6 @@ resource "azurerm_role_assignment" "appconfigrole" {
 
 resource "azurerm_role_assignment" "cosmosdbrole" {
   scope = data.azurerm_cosmosdb_account.cosmosdb.id
-  role_definition_id = "00000000-0000-0000-0000-000000000002"
+  role_definition_name = "Cosmos DB Built-in Data Contributor"
   principal_id = azurerm_function_app.myhealthactivity.identity[0].principal_id
 }
