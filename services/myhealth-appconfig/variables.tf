@@ -17,3 +17,9 @@ variable "key_vault_name" {
 variable "external_resource_group_name" {
   default = "velidaazureengine-rg"
 }
+
+variable "cosmosendpoint_secret" {}
+
+variable "cosmos_endpoint_key_name" {
+  default = "MyHealth:CosmosEndpoint"
+}

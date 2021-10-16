@@ -22,6 +22,11 @@ data "azurerm_key_vault" "keyvault" {
   resource_group_name = var.external_resource_group_name
 }
 
+data "azurerm_key_vault_secret" "cosmosendpoint" {
+  name = var.cosmosendpoint_secret
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 data "azurerm_client_config" "current" {}
 
 module "resource_group" {
@@ -36,6 +41,12 @@ module "resource_group" {
     }
 }
 
+resource "azurerm_role_assignment" "appconf_dataowner" {
+  scope = azurerm_app_configuration.appconfig.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id = data.azurerm_client_config.current.object_id
+}
+
 resource "azurerm_app_configuration" "appconfig" {
   name = var.app_config
   resource_group_name = module.resource_group.name
@@ -47,8 +58,13 @@ resource "azurerm_app_configuration" "appconfig" {
   }
 }
 
-resource "azurerm_role_assignment" "appconf_dataowner" {
-  scope = azurerm_app_configuration.appconfig.id
-  role_definition_name = "App Configuration Data Owner"
-  principal_id = data.azurerm_client_config.current.object_id
+resource "azurerm_app_configuration_key" "cosmosendpointkey" {
+    configuration_store_id = azurerm_app_configuration.appconfig.id
+    vault_key_reference = data.azurerm_key_vault_secret.cosmosendpoint.id
+    type = "vault"
+    key = var.cosmos_endpoint_key_name
+
+    depends_on = [
+      azurerm_role_assignment.appconf_dataowner
+    ]
 }
