@@ -118,7 +118,7 @@ resource "azurerm_app_configuration_key" "exceptionqueue" {
   ]
 }
 
-resource "azurerm_key_vault_secret" "cosmosendpoint" {
+resource "azurerm_key_vault_secret" "appconfigendpoint" {
  name = var.myhealth_appconfig_endpoint
  value = azurerm_app_configuration.appconfig.endpoint
  key_vault_id = data.azurerm_key_vault.keyvault.id
