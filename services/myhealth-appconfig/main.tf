@@ -17,6 +17,13 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_key_vault" "keyvault" {
+  name = var.key_vault_name
+  resource_group_name = var.external_resource_group_name
+}
+
+data "azurerm_client_config" "current" {}
+
 module "resource_group" {
     source = "../../modules/resource_group"
     resource_group_name = var.resource_group_name
@@ -38,4 +45,10 @@ resource "azurerm_app_configuration" "appconfig" {
   identity {
     type = "SystemAssigned"
   }
+}
+
+resource "azurerm_role_assignment" "appconf_dataowner" {
+  scope = azurerm_app_configuration.appconfig.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id = data.azurerm_client_config.current.object_id
 }
