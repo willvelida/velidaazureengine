@@ -53,3 +53,5 @@ variable "exceptionqueue_key" {
 variable "exceptionqueue_value" {
   default = "myhealthexceptionqueue"
 }
+
+variable "myhealth_appconfig_endpoint" {}
