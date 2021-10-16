@@ -27,6 +27,11 @@ data "azurerm_key_vault_secret" "cosmosendpoint" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+data "azurerm_key_vault_secret" "servicebusconnectionstring" {
+  name = var.service_bus_connection
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 data "azurerm_client_config" "current" {}
 
 module "resource_group" {
@@ -67,4 +72,15 @@ resource "azurerm_app_configuration_key" "cosmosendpointkey" {
     depends_on = [
       azurerm_role_assignment.appconf_dataowner
     ]
+}
+
+resource "azurerm_app_configuration_key" "servicebuskey" {
+  configuration_store_id = azurerm_app_configuration.appconfig.id
+  vault_key_reference = data.azurerm_key_vault_secret.servicebusconnectionstring.id
+  type = "vault"
+  key = var.service_bus_key_name
+
+  depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
 }
