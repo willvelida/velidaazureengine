@@ -34,7 +34,7 @@ variable "myhealthdb_key" {
   default = "MyHealth:DatabaseName"
 }
 
-variable "myhealthcontainer_value" {
+variable "myhealthdb_value" {
   default = "MyHealthDB"
 }
 
