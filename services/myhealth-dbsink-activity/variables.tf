@@ -41,3 +41,11 @@ variable "myhealth_dbsink_activity_function_name" {
 variable "tenant_id" {
   default = "e60bb76c-8fda-4ed4-a354-4836e3bfcbc3"
 }
+
+variable "appconfig_name" {
+  default = "myhealthappconfig"
+}
+
+variable "appconfig_rg" {
+  default = "myhealthappconfig-rg"
+}

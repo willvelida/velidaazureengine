@@ -2,7 +2,7 @@ terraform {
   required_providers {
       azurerm = {
         source = "hashicorp/azurerm"
-        version = "2.46.0"
+        version = "~>2.0"
       }
     }
     backend "azure" {
@@ -35,6 +35,12 @@ data "azurerm_key_vault" "velidakeyvault" {
     resource_group_name = var.velida_resource_group_name
 }
 
+# Import App Config
+data "azurerm_app_configuration" "appconfig" {
+  name = var.appconfig_name
+  resource_group_name = var.appconfig_rg
+} 
+
 # Import App Service Plan
 data "azurerm_app_service_plan" "appplan" {
     name = var.myhealth_app_service_plan
@@ -53,8 +59,8 @@ module "storage_account" {
     is_hns_enabled = "false"
 }
 
-# Create Function App for MyHealth.FileValidator.Activity
-resource "azurerm_function_app" "myhealthexceptions" {
+# Create Function App for MyHealth.DBSink.Activity
+resource "azurerm_function_app" "myhealthactivity" {
   name = var.myhealth_dbsink_activity_function_name
   location = module.resource_group.location
   resource_group_name = module.resource_group.name
@@ -77,6 +83,12 @@ resource "azurerm_function_app" "myhealthexceptions" {
 resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
   key_vault_id = data.azurerm_key_vault.velidakeyvault.id
   tenant_id = var.tenant_id
-  object_id = azurerm_function_app.myhealthexceptions.identity[0].principal_id
+  object_id = azurerm_function_app.myhealthactivity.identity[0].principal_id
   secret_permissions = [ "get","list" ]
+}
+
+resource "azurerm_role_assignment" "appconfigrole" {
+  scope = data.azurerm_app_configuration.appconfig.id
+  role_definition_name = "App Configuration Data Reader"
+  principal_id = azurerm_function_app.myhealthactivity.identity[0].principal_id
 }
