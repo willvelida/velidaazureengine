@@ -106,3 +106,14 @@ resource "azurerm_app_configuration_key" "myhealthcontainer" {
     azurerm_role_assignment.appconf_dataowner
   ]
 }
+
+resource "azurerm_app_configuration_key" "exceptionqueue" {
+  configuration_store_id = azurerm_app_configuration.appconfig.id
+  key = var.exceptionqueue_key
+  value = var.exceptionqueue_value
+  type = "kv"
+
+  depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}

@@ -45,3 +45,11 @@ variable "myhealthcontainer_key" {
 variable "myhealthcontainer_value" {
   default = "Records"
 }
+
+variable "exceptionqueue_key" {
+  default = "MyHealth:ExceptionQueue"
+}
+
+variable "exceptionqueue_value" {
+  default = "myhealthexceptionqueue"
+}
