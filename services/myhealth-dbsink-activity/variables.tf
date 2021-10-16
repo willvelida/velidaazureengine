@@ -49,3 +49,11 @@ variable "appconfig_name" {
 variable "appconfig_rg" {
   default = "myhealthappconfig-rg"
 }
+
+variable "myhealth_cosmos_name" {
+  default = "myhealthplatform"
+}
+
+variable "myhealth_cosmos_resource_group" {
+  default = "myhealthdb-rg"
+}

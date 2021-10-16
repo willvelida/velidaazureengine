@@ -47,6 +47,12 @@ data "azurerm_app_service_plan" "appplan" {
     resource_group_name = var.myhealth_app_resource_group
 }
 
+# Import Cosmos DB
+data "azurerm_cosmosdb_account" "cosmosdb" {
+  name = var.myhealth_cosmos_name
+  resource_group_name = var.myhealth_cosmos_resource_group
+}
+
 # Create storage account for MyHealth.FileValidator.Activity
 module "storage_account" {
     source = "../../modules/storage_account"
@@ -90,5 +96,11 @@ resource "azurerm_key_vault_access_policy" "velidakeyvault_policy" {
 resource "azurerm_role_assignment" "appconfigrole" {
   scope = data.azurerm_app_configuration.appconfig.id
   role_definition_name = "App Configuration Data Reader"
+  principal_id = azurerm_function_app.myhealthactivity.identity[0].principal_id
+}
+
+resource "azurerm_role_assignment" "cosmosdbrole" {
+  scope = data.azurerm_cosmosdb_account.cosmosdb.id
+  role_definition_id = "00000000-0000-0000-0000-000000000002"
   principal_id = azurerm_function_app.myhealthactivity.identity[0].principal_id
 }
