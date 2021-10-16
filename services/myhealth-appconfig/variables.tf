@@ -29,3 +29,19 @@ variable "cosmos_endpoint_key_name" {
 variable "service_bus_key_name" {
   default = "VelidaEngine:ServiceBusConnectionString"
 }
+
+variable "myhealthdb_key" {
+  default = "MyHealth:DatabaseName"
+}
+
+variable "myhealthcontainer_value" {
+  default = "MyHealthDB"
+}
+
+variable "myhealthcontainer_key" {
+  default = "MyHealth:RecordsContainer"
+}
+
+variable "myhealthcontainer_value" {
+  default = "Records"
+}

@@ -84,3 +84,25 @@ resource "azurerm_app_configuration_key" "servicebuskey" {
     azurerm_role_assignment.appconf_dataowner
   ]
 }
+
+resource "azurerm_app_configuration_key" "myhealthdb" {
+    configuration_store_id = azurerm_app_configuration.appconfig.id
+    key = var.myhealthdb_key
+    value = var.myhealthdb_value
+    type = "kv"
+
+    depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}
+
+resource "azurerm_app_configuration_key" "myhealthcontainer" {
+  configuration_store_id = azurerm_app_configuration.appconfig.id
+    key = var.myhealthcontainer_key
+    value = var.myhealthcontainer_value
+    type = "kv"
+
+    depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}
