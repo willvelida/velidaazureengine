@@ -69,5 +69,3 @@ variable "myhealth_db_secondary_readonly_key" {
 variable "myhealth_diagnostics_settings" {
   default = "myhealth_cosmos_diagnostics"
 }
-
-variable "ip_rules" {}

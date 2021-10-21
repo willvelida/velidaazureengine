@@ -49,11 +49,6 @@ resource "azurerm_cosmosdb_account" "account" {
   offer_type = "Standard"
   kind = "GlobalDocumentDB"
 
-  public_network_access_enabled = false
-  ip_range_filter = var.ip_rules
-
-  local_authentication_disabled = false
-
   enable_automatic_failover = true
 
   geo_location {
