@@ -34,6 +34,12 @@ variable "myhealthdb_key" {
   default = "MyHealth:DatabaseName"
 }
 
+variable "cosmos_connection_key_name" {
+  default = "MyHealth:CosmosDBConnectionString"
+}
+
+variable "comsosconnection_secret" {}
+
 variable "myhealthdb_value" {
   default = "MyHealthDB"
 }
