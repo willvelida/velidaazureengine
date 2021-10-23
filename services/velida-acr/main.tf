@@ -32,4 +32,5 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = module.resource_group.name
   location = module.resource_group.location
   sku = "Basic"
+  admin_enabled = true
 }
