@@ -61,7 +61,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   default_node_pool {
     name = var.velida_k8s_node_pool_name
     vm_size = "Standard_B2s"
-    node_count = 1
+    node_count = 3
   }
 
   identity {
